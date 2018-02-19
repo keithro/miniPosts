@@ -50,6 +50,36 @@ class UI {
       `;
     }, '');
   }
+
+  showAlert(message, className) {
+    this.clearAlert();
+
+    const div = document.createElement('div');
+    div.className = className;
+    div.appendChild(document.createTextNode(message));
+    // Get parent and post div then insert between
+    const container = document.querySelector('.postsContainer');
+    const posts = document.querySelector('#posts');
+    container.insertBefore(div, posts);
+
+    // Set timeout to clear alert
+    setTimeout(() => {
+      this.clearAlert();
+    }, 3000);
+  }
+
+  clearAlert() {
+    const currentAlert = document.querySelector('.alert');
+
+    if(currentAlert) {
+      currentAlert.remove();
+    }
+  }
+
+  clearFields() {
+    this.titleInput.value = '';
+    this.bodyInput.value = '';
+  }
 }
 
 export const ui = new UI();
